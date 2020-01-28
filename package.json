@@ -1,24 +1,26 @@
 {
-  "name": "language-rust",
-  "version": "0.4.12",
-  "description": "Rust language support in Atom",
+  "name": "language-kry",
+  "version": "0.1.0",
+  "description": "kry language support in Atom",
   "keywords": [
-    "rust",
+    "kry",
     "language",
     "grammar",
-    "syntax"
+    "syntax",
+    "type-theory",
+    "cubical"
   ],
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0 <2.0.0"
   },
   "dependencies": {},
-  "homepage": "https://github.com/zargony/atom-language-rust",
+  "homepage": "https://github.com/ruza-net/language-kry",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zargony/atom-language-rust.git"
+    "url": "https://github.com/ruza-net/language-kry.git"
   },
   "bugs": {
-    "url": "https://github.com/zargony/atom-language-rust/issues"
+    "url": "https://github.com/ruza-net/language-kry/issues"
   }
 }

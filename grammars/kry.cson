@@ -1,0 +1,260 @@
+'name': 'kry'
+'scopeName': 'source.kry'
+'fileTypes': [
+  'kry'
+  'kr'
+]
+
+'repository': {
+  'block_doc_comment': {
+    'comment': 'Block documentation comment'
+    'name': 'comment.block.documentation.kry'
+    'begin': '--\\{\\!'
+    'end': '--\\}'
+    'patterns': [
+      { 'include': '#block_doc_comment' }
+      { 'include': '#block_comment' }
+    ]
+  }
+  'block_comment': {
+    'comment': 'Block comment'
+    'name': 'comment.block.kry'
+    'begin': '--\\{'
+    'end': '--\\}'
+    'patterns': [
+      { 'include': '#block_doc_comment' }
+      { 'include': '#block_comment' }
+    ]
+  }
+  'line_doc_comment': {
+    'comment': 'Single-line documentation comment'
+    'name': 'comment.line.documentation.kry'
+    'begin': '--\\!'
+    'end': '$'
+  }
+  'line_comment': {
+    'comment': 'Single-line comment'
+    'name': 'comment.line.double-dash.kry'
+    'begin': '--'
+    'end': '$'
+  }
+  'escaped_character': {
+    'name': 'constant.character.escape.kry'
+    'match': '\\\\(x[0-9A-Fa-f]{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)'
+  }
+  'module': {
+    'comment': 'Module'
+    'name': 'item.module.kry'
+    'match': '\\bmodule\\b'
+  }
+  'data': {
+    'comment': 'Inductive data'
+    'name': 'keyword.data.inductive.kry'
+    'match': '\\bdata\\b'
+  }
+  'codata': {
+    'comment': 'Coinductive data'
+    'name': 'keyword.data.coinductive.kry'
+    'match': '\\bcodata\\b'
+  }
+  'where': {
+    'comment': 'Generic where clause'
+    'name': 'keyword.other.where.kry'
+    'match': '\\bwhere\\b'
+  }
+  'core_types': {
+    'comment': 'Built-in/core type'
+    'name': 'storage.type.core.kry'
+    'match': '\\b(0t|1t|Type)\\b'
+  }
+  'core_vars': {
+    'comment': 'Core type variant'
+    'name': 'support.constant.core.kry'
+    'match': '\\(\\)'
+  }
+  'core_dims': {
+    'comment': 'Core dimension variants'
+    'name': 'support.dimension.core.kry'
+    'match': '\\b(1i|0i)\\b'
+  }
+  'core_faces': {
+    'comment': 'Core cube face variants'
+    'name': 'support.face.core.kry'
+    'match': '\\b(1s|0s)\\b'
+  }
+  'std_types': {
+    'comment': 'Standard library types'
+    'name': 'storage.type.std.kry'
+    'match': '\\b(N|Z|S|Bool)\\b'
+  }
+  'std_const': {
+    'comment': 'Standard library constants'
+    'name': 'support.constant.std.kry'
+    'match': '\\b(next|prev|0|base|loop|true|false)\\b'
+  }
+  'ident': {
+    'comment': 'An identifier'
+    'name': 'entity.name.kry'
+    'match': '\\b([A-Za-z][_A-Za-z0-9]*\'*|_[_A-Za-z0-9]+\'*)\\b'
+  }
+}
+
+'patterns': [
+  # Data
+  {
+    'comment': 'Data'
+    'begin': '\\b(data)\\b'
+    'end': '='
+    'beginCaptures': {
+      '1': { 'name': 'storage.type.kry' }
+    }
+    'patterns': [
+        { 'include': '#block_comment' }
+        { 'include': '#line_comment' }
+        { 'include': '#core_types' }
+        { 'include': '#where' }
+        { 'include': '#ident' }
+      ]
+  }
+  # Codata
+  {
+    'comment': 'Codata'
+    'begin': '\\b(codata)\\b'
+    'end': '='
+    'beginCaptures': {
+      '1': { 'name': 'storage.type.kry' }
+    }
+    'patterns': [
+        { 'include': '#block_comment' }
+        { 'include': '#line_comment' }
+        { 'include': '#core_types' }
+        { 'include': '#where' }
+        { 'include': '#ident' }
+      ]
+  }
+  # Comments
+  { 'include': '#block_doc_comment' }
+  { 'include': '#block_comment' }
+  { 'include': '#line_doc_comment' }
+  { 'include': '#line_comment' }
+  { 'include': '#std_types' }
+  { 'include': '#std_const' }
+  # Numbers
+  {
+    'comment': 'Integer literal'
+    'name': 'constant.numeric.integer.kry'
+    'match': '\\b(0[0-9_]+|[1-9][0-9_]*)\\b'
+  }
+  # Language
+  {
+    'comment': 'Builting constant modifier'
+    'name': 'constant.modifier.builtin.kry'
+    'match': '\\bbuiltin\\b'
+  }
+  {
+    'comment': 'Control-flow functions'
+    'name': 'support.constant.control.kry'
+    'match': '\\b(if|in)\\b'
+  }
+  {
+    'comment': 'Core controls'
+    'name': 'keyword.control.kry'
+    'match': '\\b(match|with)\\b'
+  }
+  # Operators
+  {
+    'comment': 'Miscellaneous operator'
+    'name': 'keyword.operator.misc.kry'
+    'match': '(=>|::|\\.|\\bforall\\b)'
+  }
+  {
+    'comment': 'Dimension operator'
+    'name': 'keyword.operator.dimension.kry'
+    'match': '(&|\\||\\~)'
+  }
+  {
+    'comment': 'Assignment operator'
+    'name': 'keyword.operator.assignment.kry'
+    'match': '(:|=)'
+  }
+  {
+    'comment': 'Arithmetic operator'
+    'name': 'keyword.operator.arithmetic.kry'
+    'match': '(!|\\+|-|/|\\*|%|\\^)'
+  }
+  # Standard types and traits
+  { 'include': '#core_types' }
+  { 'include': '#core_vars' }
+  { 'include': '#core_dims' }
+  { 'include': '#core_faces' }
+  # Macros
+  {
+    'comment': 'Core operation'
+    'name': 'support.operation.core.kry'
+    'match': '\\b(send|Glue|ssend)\\b'
+  }
+  {
+    'comment': 'Logging operation'
+    'name': 'support.operation.log.kry'
+    'match': '\\b(@print|@print_ln|@print_debug|@print_type)\\b'
+  }
+  # Function and macro calls
+  {
+    'comment': 'Qualified function call'
+    'match': '::([A-Za-z][_A-Za-z0-9]*\'*|_[_A-Za-z0-9]+\'*)\\b'
+  }
+  # Function definition
+  {
+    'comment': 'Function definition'
+    'begin': '\\b([A-Za-z][_A-Za-z0-9]*\'*|_[_A-Za-z0-9]+\'*)\\s*'
+    'end': '[:=]'
+    'beginCaptures': {
+      '1': { 'name': 'entity.name.kry' }
+    }
+    'patterns': [
+      { 'include': '#block_comment' }
+      { 'include': '#line_comment' }
+      { 'include': '#core_types' }
+      { 'include': '#core_dims' }
+      { 'include': '#core_faces' }
+      { 'include': '#std_types' }
+      { 'include': '#std_const' }
+      { 'include': '#ident' }
+      { 'include': '#where' }
+    ]
+  }
+  # Block declaration
+  {
+    'comment': 'Block declaration'
+    'begin': '\\b(data|codata|module)\\s+([A-Za-z][_A-Za-z0-9]*\'*|_[_A-Za-z0-9]+\'*)'
+    'end': '='
+    'beginCaptures': {
+      '1': { 'name': 'storage.type.kry' }
+      '2': { 'name': 'entity.name.kry' }
+    }
+    'patterns': [
+      { 'include': '#block_comment' }
+      { 'include': '#line_comment' }
+      { 'include': '#core_types' }
+      { 'include': '#where' }
+    ]
+  }
+  # Type alias
+  {
+    'comment': 'Type alias'
+    'begin': '\\b(type)\\s+([A-Za-z][_A-Za-z0-9]*\'*|_[_A-Za-z0-9]+\'*)'
+    'end': '$'
+    'beginCaptures': {
+      '1': { 'name': 'storage.type.rust' }
+      '2': { 'name': 'entity.name.rust' }
+    }
+    'patterns': [
+      { 'include': '#block_comment' }
+      { 'include': '#line_comment' }
+      { 'include': '#core_types' }
+      { 'include': '#core_dims' }
+      { 'include': '#core_faces' }
+      { 'include': '#std_types' }
+    ]
+  }
+]

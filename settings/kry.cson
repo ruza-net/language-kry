@@ -1,6 +1,6 @@
-'.source.rust':
+'.source.kry':
   'editor':
-    'commentStart': '// '
+    'commentStart': '--'
     'increaseIndentPattern': '(?x)
        ^ .* \\{ [^}"\']* $
       |^ .* \\( [^\\)"\']* $
